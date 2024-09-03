@@ -1,0 +1,19 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "dotnet",
+			"task": "build /workspace/src/debugMe/debugMe.csproj",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "build debugMe"
+		},
+		{
+			"type": "shell",
+			"command": "pwsh /workspace/scripts/publish.ps1 -csproj /workspace/src/debugMe/debugMe.csproj -remoteHost ${config:dotnetDebug.remoteHost} -remoteFolder ${config:dotnetDebug.remoteFolder}",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "publish debugMe"
+		},
+	]
+}

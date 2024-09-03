@@ -1,0 +1,48 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "PowerShell: Launch Current File",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${file}",
+            "args": []
+        },
+        {
+            "name": "remote debug",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "publish debugMe",
+            "program": "debugMe",
+            "args": [],
+            "cwd": "${config:dotnetDebug.remoteFolder}",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "justMyCode": false,
+            "sourceFileMap": {
+                "${config:dotnetDebug.remoteFolder}": "${workspaceRoot}"
+            },
+            "requireExactSource": false,
+            "pipeTransport": {
+                "pipeProgram": "ssh",
+                "pipeArgs": [
+                    "-q",
+                    "-T",
+                    "${config:dotnetDebug.remoteHost}"
+                ],
+                "debuggerPath": "~/.vs-debugger/vs2022/vsdbg",
+                "pipeCwd": "${workspaceRoot}",
+                "quoteArgs": true,
+            },
+            "symbolOptions": {
+                "searchPaths": [
+                    "${config:dotnetDebug.remoteFolder}"
+                ],
+                "searchMicrosoftSymbolServer": false
+            }
+        }
+    ]
+}
